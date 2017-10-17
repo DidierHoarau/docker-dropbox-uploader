@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+
+  app:
+    build: .
+    image: ${DOCKER_REGISTRY}/docker-dropbox-uploader_app
+    volumes:
+      - /opt/data/docker-data-backup:/opt/files

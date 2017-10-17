@@ -1,0 +1,9 @@
+{
+  "folders": {
+    "files": "/opt/files",
+    "dropboxBase": "/Backup"
+  },
+  "waitStableDelay": 10000,
+  "checkInterval": 1800000,
+  "dropboxToken": "SET-YOUR-DROPBOX-TOKEN-HERE"
+}

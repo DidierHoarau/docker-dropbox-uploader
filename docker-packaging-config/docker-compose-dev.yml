@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    image: ${DOCKER_REGISTRY}/docker-dropbox-uploader_app
+    volumes:
+      - ${PROJECT_DIR}/src:/opt/app/src
+      - ${PROJECT_DIR}/tmp/files:/opt/files

@@ -1,0 +1,8 @@
+FROM node
+
+WORKDIR /opt/app
+
+COPY files/dev /opt/app
+COPY files/node_modules /opt/app/node_modules
+
+CMD ["tail", "-f", "/dev/null"]
