@@ -4,8 +4,9 @@ set -e
 
 npm install
 npm run lint
+npm run build
 cp -R $PROJECT_DIR/node_modules $PACKAGING_FILES
-cp -R $PROJECT_DIR/src $PACKAGING_FILES
+cp -R $PROJECT_DIR/dist $PACKAGING_FILES
 
 mkdir $PACKAGING_FILES/dev
 cp $PROJECT_DIR/package.json $PACKAGING_FILES/dev
