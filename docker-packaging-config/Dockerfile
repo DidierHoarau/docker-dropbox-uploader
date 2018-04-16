@@ -1,7 +1,7 @@
-FROM node
+FROM node:alpine
 
 WORKDIR /opt/app
 
 COPY files/ /opt/app
 
-CMD ["node", "src/app.js"]
+CMD ["node", "dist/app.js"]
