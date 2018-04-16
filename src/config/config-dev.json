@@ -1,8 +1,6 @@
 {
-  "folders": {
-    "files": "/opt/files",
-    "dropboxBase": "/Backup-Dev"
-  },
+  "folderFiles": "./files",
+  "folderDropboxBase": "/Backup-Dev",
   "waitStableDelay": 1000,
   "checkInterval": 15000,
   "dropboxToken": "SET-YOUR-DROPBOX-TOKEN-HERE"
