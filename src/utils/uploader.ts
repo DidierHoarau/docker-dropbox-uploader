@@ -13,15 +13,13 @@ const LOGTAG = '[uploader]';
 
 export class Uploader {
   //
-  public static scanAndUpload(): Promise<void> {
-    return Promise.resolve().then(async () => {
-      const files = [];
-      walkSync(config.folderFiles, files);
-      await Timeout.wait(config.waitStableDelay); // Wait for the files to be stable
-      for (const file of files) {
-        await upload(file);
-      }
-    });
+  public static async scanAndUpload(): Promise<void> {
+    const files = [];
+    walkSync(config.folderFiles, files);
+    await Timeout.wait(config.waitStableDelay); // Wait for the files to be stable
+    for (const file of files) {
+      await upload(file);
+    }
   }
 }
 
@@ -38,16 +36,14 @@ function walkSync(dir: string, filelist: string[]): string[] {
   return filelist;
 }
 
-function upload(filePath: string): Promise<void> {
-  return Promise.resolve().then(async () => {
-    const fileData = await fse.readFile(filePath);
-    const fileBasePath = filePath.replace(config.folderFiles, '');
-    const dbxPath = `${config.folderDropboxBase}/${fileBasePath}`;
-    Logger.info(LOGTAG, `Uploading ${filePath} to ${dbxPath}`);
-    await dbx.filesUpload({ path: dbxPath, contents: fileData }).catch(error => {
-      throw new Error(error.error.error_summary);
-    });
-    await fse.remove(filePath);
-    Logger.info(LOGTAG, `Upload of ${filePath} completed`);
+async function upload(filePath: string): Promise<void> {
+  const fileData = await fse.readFile(filePath);
+  const fileBasePath = filePath.replace(config.folderFiles, '');
+  const dbxPath = `${config.folderDropboxBase}${fileBasePath}`;
+  Logger.info(LOGTAG, `Uploading ${filePath} to ${dbxPath}`);
+  await dbx.filesUpload({ path: dbxPath, contents: fileData }).catch(error => {
+    throw new Error(error.error.error_summary);
   });
+  await fse.remove(filePath);
+  Logger.info(LOGTAG, `Upload of ${filePath} completed`);
 }
